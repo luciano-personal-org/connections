@@ -1,13 +1,13 @@
 package connections
 
 import (
-
-    "github.com/luciano-personal-org/config"
 	"context"
 	"fmt"
 	"net"
 	"os"
 	"strconv"
+
+	"github.com/luciano-personal-org/config"
 )
 
 // Initialize the subscription
@@ -16,7 +16,7 @@ func InitSubscription(ctx context.Context, conn net.Conn, subscription string) {
 }
 
 // ConnectToCedroServer is an exported function that connects to the Cedro server.
-func ConnectToCedroServer(ctx context.Context, endpoint string, simulation bool, configuration Config) (net.Conn, error) {
+func ConnectToCedroServer(ctx context.Context, endpoint string, simulation bool, configuration config.Config) (net.Conn, error) {
 
 	// Connect to the Cedro server
 	conn, err := net.Dial("tcp4", endpoint)
@@ -40,7 +40,7 @@ func ConnectToCedroServer(ctx context.Context, endpoint string, simulation bool,
 	// Create a buffer
 	buffer := make([]byte, bufferSize)
 	// Read the buffer
-	_, err = helpers.Readbuffer(ctx, conn, buffer)
+	_, err = Readbuffer(ctx, conn, buffer)
 	if err != nil {
 		fmt.Println("Error reading", err.Error())
 		os.Exit(1)
@@ -57,7 +57,7 @@ func ConnectToCedroServer(ctx context.Context, endpoint string, simulation bool,
 }
 
 // SoftwareKey is an exported function that sends the software key to the Cedro server.
-func SoftwareKey(ctx context.Context, softwarekey string, conn net.Conn, configuration Config) (err error) {
+func SoftwareKey(ctx context.Context, softwarekey string, conn net.Conn, configuration config.Config) (err error) {
 
 	// Prepare the message with the software key
 	// message := "SoftwareKey:" + softwarekey + "\n"
@@ -81,7 +81,7 @@ func SoftwareKey(ctx context.Context, softwarekey string, conn net.Conn, configu
 	// Create a buffer
 	buffer := make([]byte, bufferSize)
 	// Read the buffer
-	_, err = helpers.Readbuffer(ctx, conn, buffer)
+	_, err = Readbuffer(ctx, conn, buffer)
 	if err != nil {
 		fmt.Println("Error reading", err.Error())
 		os.Exit(1)
@@ -97,7 +97,7 @@ func SoftwareKey(ctx context.Context, softwarekey string, conn net.Conn, configu
 }
 
 // UserLogin is an exported function that sends the username to the Cedro server.
-func UserLogin(ctx context.Context, username string, conn net.Conn, configuration Config) (err error) {
+func UserLogin(ctx context.Context, username string, conn net.Conn, configuration config.Config) (err error) {
 
 	message := username + "\n"
 	fmt.Print(message)
@@ -119,7 +119,7 @@ func UserLogin(ctx context.Context, username string, conn net.Conn, configuratio
 	// Create a buffer
 	buffer := make([]byte, bufferSize)
 	// Read the buffer
-	_, err = helpers.Readbuffer(ctx, conn, buffer)
+	_, err = Readbuffer(ctx, conn, buffer)
 	if err != nil {
 		fmt.Println("Error reading", err.Error())
 		os.Exit(1)
@@ -135,7 +135,7 @@ func UserLogin(ctx context.Context, username string, conn net.Conn, configuratio
 }
 
 // UserPassword is an exported function that sends the password to the Cedro server.
-func UserPassword(ctx context.Context, password string, conn net.Conn, configuration Config) (err error) {
+func UserPassword(ctx context.Context, password string, conn net.Conn, configuration config.Config) (err error) {
 
 	message := password + "\n"
 	fmt.Print(message)
@@ -157,7 +157,7 @@ func UserPassword(ctx context.Context, password string, conn net.Conn, configura
 	// Create a buffer
 	buffer := make([]byte, bufferSize)
 	// Read the buffer
-	_, err = helpers.Readbuffer(ctx, conn, buffer)
+	_, err = Readbuffer(ctx, conn, buffer)
 	if err != nil {
 		fmt.Println("Error reading", err.Error())
 		os.Exit(1)
@@ -173,7 +173,7 @@ func UserPassword(ctx context.Context, password string, conn net.Conn, configura
 }
 
 // NewCedroConnector is an exported function that creates a new CedroConnector.
-func NewCedroConnector(ctx context.Context, configuration Config) (net.Conn, error) {
+func NewCedroConnector(ctx context.Context, configuration config.Config) (net.Conn, error) {
 
 	// Get the software key from the configuration
 	endpoint := configuration.Get("ENDPOINT")
