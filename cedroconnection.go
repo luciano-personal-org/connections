@@ -1,7 +1,8 @@
 package connections
 
 import (
-	"algo-trading-connector/core/helpers"
+
+    "github.com/luciano-personal-org/config"
 	"context"
 	"fmt"
 	"net"
