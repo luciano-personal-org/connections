@@ -30,7 +30,7 @@ func ConnectToCedroServer(ctx context.Context, endpoint string, simulation bool,
 	}
 
 	// Get the buffer size from the configuration
-	bufferSizeStr := configuration.Get("connector.buffer_size")
+	bufferSizeStr := configuration.Get("connector_processor.buffer_size")
 	bufferSize, err := strconv.Atoi(bufferSizeStr)
 	if err != nil {
 		fmt.Println("Error converting buffer size", err.Error())
@@ -71,7 +71,7 @@ func SoftwareKey(ctx context.Context, softwarekey string, conn net.Conn, configu
 	}
 
 	// Get the buffer size from the configuration
-	bufferSizeStr := configuration.Get("connector.buffer_size")
+	bufferSizeStr := configuration.Get("connector_processor.buffer_size")
 	bufferSize, err := strconv.Atoi(bufferSizeStr)
 	if err != nil {
 		fmt.Println("Error converting buffer size", err.Error())
@@ -109,7 +109,7 @@ func UserLogin(ctx context.Context, username string, conn net.Conn, configuratio
 	}
 
 	// Get the buffer size from the configuration
-	bufferSizeStr := configuration.Get("connector.buffer_size")
+	bufferSizeStr := configuration.Get("connector_processor.buffer_size")
 	bufferSize, err := strconv.Atoi(bufferSizeStr)
 	if err != nil {
 		fmt.Println("Error converting buffer size", err.Error())
@@ -147,7 +147,7 @@ func UserPassword(ctx context.Context, password string, conn net.Conn, configura
 	}
 
 	// Get the buffer size from the configuration
-	bufferSizeStr := configuration.Get("connector.buffer_size")
+	bufferSizeStr := configuration.Get("connector_processor.buffer_size")
 	bufferSize, err := strconv.Atoi(bufferSizeStr)
 	if err != nil {
 		fmt.Println("Error converting buffer size", err.Error())
@@ -176,16 +176,16 @@ func UserPassword(ctx context.Context, password string, conn net.Conn, configura
 func NewCedroConnector(ctx context.Context, configuration config.Config) (net.Conn, error) {
 
 	// Get the software key from the configuration
-	endpoint := configuration.Get("connector.hostport")
+	endpoint := configuration.Get("connector_processor.hostport")
 	// Get the software key from the configuration
-	softwarekey := configuration.Get("connector.softwarekey")
+	softwarekey := configuration.Get("connector_processor.softwarekey")
 	// // Get the username from the configuration
-	username := configuration.Get("connector.username")
+	username := configuration.Get("connector_processor.username")
 	// // Get the password from the configuration
-	password := configuration.Get("connector.password")
+	password := configuration.Get("connector_processor.password")
 
 	// Get the simulation value from the configuration
-	simulation, err := strconv.ParseBool(configuration.Get("connector.simulation"))
+	simulation, err := strconv.ParseBool(configuration.Get("connector_processor.simulation"))
 	if err != nil {
 		fmt.Println("Error parsing simulation value", err.Error())
 		os.Exit(1)
