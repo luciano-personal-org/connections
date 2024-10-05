@@ -7,16 +7,8 @@ import (
 	"net"
 )
 
-// Buffer Size to capture the data
-// const bufferSize = 4096
-
 // Readbuffer reads the buffer from the connection.
 func Readbuffer(ctx context.Context, conn net.Conn, buffer []byte) (record string, err error) {
-
-	// Create a buffer
-	// TODO: Move to Configuration
-	// TODO: Checkout for memory leak
-	// buffer := make([]byte, bufferSize)
 
 	// Read the buffer
 	_, err = conn.Read(buffer)
