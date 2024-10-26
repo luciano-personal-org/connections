@@ -27,7 +27,7 @@ func ConnectToCedroServer(ctx context.Context, endpoint string, simulation bool,
 	conn, err := net.Dial("tcp4", endpoint)
 	// Check if there was an error connecting to the Cedro server
 	if err != nil {
-		custom_error = connections_exception.ErrCedroConnection
+		custom_error = connections_exception.CedroConnectionError
 		custom_error.SetOriginalError(err)
 		custom_error.SetDetails("When trying to connect into Quotes Server on ConnectToCedroServer")
 		exceptioncore.PanicIfNeeded(custom_error)
