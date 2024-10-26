@@ -4,3 +4,5 @@ github.com/luciano-personal-org/config v0.1.1 h1:y93zrWV/KGUFliiLVWXUdbU4KkWsnEa
 github.com/luciano-personal-org/config v0.1.1/go.mod h1:00ajkybJT4mcC/ZGIO+qNcds/gjjGKVHWqwnq93XC8I=
 github.com/luciano-personal-org/exception v0.1.0 h1:msE7gH6rR92ldCtEo33xLwaQY9wNF5gzmG5w7AqsCPs=
 github.com/luciano-personal-org/exception v0.1.0/go.mod h1:r/0gZlL8jvnRE6Z+6NDFXNtqR76Z6D5E5ffvXCwUcj8=
+github.com/luciano-personal-org/exception v0.1.4 h1:v/JTJKr+9Cal5km/b9zlV7lXW9z7Hd9khLmwAfSM0Wc=
+github.com/luciano-personal-org/exception v0.1.4/go.mod h1:r/0gZlL8jvnRE6Z+6NDFXNtqR76Z6D5E5ffvXCwUcj8=

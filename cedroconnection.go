@@ -7,7 +7,10 @@ import (
 	"os"
 	"strconv"
 
+	exceptioncore "github.com/luciano-personal-org/exception"
+
 	"github.com/luciano-personal-org/config"
+	"github.com/luciano-personal-org/connections/connections_exception"
 )
 
 // Initialize the subscription
@@ -21,8 +24,9 @@ func ConnectToCedroServer(ctx context.Context, endpoint string, simulation bool,
 	// Connect to the Cedro server
 	conn, err := net.Dial("tcp4", endpoint)
 	if err != nil {
-		fmt.Println("Error dialing", err.Error())
-		os.Exit(1)
+		custom_error := connections_exception.ErrCedroConnection
+		custom_error.SetOriginalError(err)
+		exceptioncore.PanicIfNeeded(connections_exception.ErrCedroConnection)
 	}
 
 	if simulation {
