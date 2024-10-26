@@ -3,7 +3,6 @@ package connections
 
 import (
 	"context"
-	"fmt"
 	"net"
 )
 
@@ -15,7 +14,6 @@ func Readbuffer(ctx context.Context, conn net.Conn, buffer []byte) (record strin
 
 	// Check if there is an error
 	if err != nil {
-		fmt.Println("Error reading", err.Error())
 		return "", err
 	}
 
