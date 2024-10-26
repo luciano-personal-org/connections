@@ -30,7 +30,7 @@ func ConnectToCedroServer(ctx context.Context, endpoint string, simulation bool,
 		custom_error = connections_exception.CedroConnectionError
 		custom_error.SetOriginalError(err)
 		custom_error.SetDetails("When trying to connect into Quotes Server on ConnectToCedroServer")
-		exceptioncore.PanicIfNeeded(custom_error)
+		exceptioncore.DoPanic(custom_error)
 	}
 
 	if simulation {
@@ -45,7 +45,7 @@ func ConnectToCedroServer(ctx context.Context, endpoint string, simulation bool,
 		custom_error = connections_exception.BufSizeParameterError
 		custom_error.SetOriginalError(err)
 		custom_error.SetDetails("When trying to convert the buffer size parameter on ConnectToCedroServer")
-		exceptioncore.PanicIfNeeded(custom_error)
+		exceptioncore.DoPanic(custom_error)
 	}
 
 	// Create a buffer
@@ -57,7 +57,7 @@ func ConnectToCedroServer(ctx context.Context, endpoint string, simulation bool,
 		custom_error = connections_exception.ReceivingMessageError
 		custom_error.SetOriginalError(err)
 		custom_error.SetDetails("When trying to receive a message from Quotes Server on ConnectToCedroServer")
-		exceptioncore.PanicIfNeeded(custom_error)
+		exceptioncore.DoPanic(custom_error)
 	}
 
 	// Print the buffer
@@ -83,7 +83,7 @@ func SoftwareKey(ctx context.Context, softwarekey string, conn net.Conn, configu
 		custom_error = connections_exception.SendingMessageError
 		custom_error.SetOriginalError(err)
 		custom_error.SetDetails("When trying to send a message with Software Key to Quotes Server on SoftwareKey")
-		exceptioncore.PanicIfNeeded(custom_error)
+		exceptioncore.DoPanic(custom_error)
 	}
 
 	// Get the buffer size from the configuration
@@ -94,7 +94,7 @@ func SoftwareKey(ctx context.Context, softwarekey string, conn net.Conn, configu
 		custom_error = connections_exception.BufSizeParameterError
 		custom_error.SetOriginalError(err)
 		custom_error.SetDetails("When trying to convert the buffer size parameter on SoftwareKey")
-		exceptioncore.PanicIfNeeded(custom_error)
+		exceptioncore.DoPanic(custom_error)
 	}
 
 	// Create a buffer
@@ -106,7 +106,7 @@ func SoftwareKey(ctx context.Context, softwarekey string, conn net.Conn, configu
 		custom_error = connections_exception.ReceivingMessageError
 		custom_error.SetOriginalError(err)
 		custom_error.SetDetails("When trying to receive a message of Software Key sent to Quotes Server on SoftwareKey")
-		exceptioncore.PanicIfNeeded(custom_error)
+		exceptioncore.DoPanic(custom_error)
 	}
 
 	// Print the buffer
@@ -126,10 +126,10 @@ func UserLogin(ctx context.Context, username string, conn net.Conn, configuratio
 	_, err = conn.Write([]byte(message))
 	// Check if there was an error sending the message
 	if err != nil {
-		// custom_error = connections_exception.SendingMessageError
-		// custom_error.SetOriginalError(err)
-		// custom_error.SetDetails("When trying to send a message with User Login to Quotes Server on UserLogin")
-		// exceptioncore.PanicIfNeeded(custom_error)
+		custom_error = connections_exception.SendingMessageError
+		custom_error.SetOriginalError(err)
+		custom_error.SetDetails("When trying to send a message with User Login to Quotes Server on UserLogin")
+		exceptioncore.DoPanic(custom_error)
 		return err
 	}
 
@@ -140,7 +140,7 @@ func UserLogin(ctx context.Context, username string, conn net.Conn, configuratio
 	if err != nil {
 		custom_error = connections_exception.BufSizeParameterError
 		custom_error.SetOriginalError(err)
-		exceptioncore.PanicIfNeeded(custom_error)
+		exceptioncore.DoPanic(custom_error)
 	}
 
 	// Create a buffer
@@ -152,7 +152,7 @@ func UserLogin(ctx context.Context, username string, conn net.Conn, configuratio
 		custom_error = connections_exception.ReceivingMessageError
 		custom_error.SetOriginalError(err)
 		custom_error.SetDetails("When trying to receive a message of User Login sent to Quotes Server on UserLogin")
-		exceptioncore.PanicIfNeeded(custom_error)
+		exceptioncore.DoPanic(custom_error)
 	}
 
 	// Print the buffer
@@ -175,7 +175,7 @@ func UserPassword(ctx context.Context, password string, conn net.Conn, configura
 		custom_error = connections_exception.SendingMessageError
 		custom_error.SetOriginalError(err)
 		custom_error.SetDetails("When trying to send a message with User Password to Quotes Server on UserPassword")
-		exceptioncore.PanicIfNeeded(custom_error)
+		exceptioncore.DoPanic(custom_error)
 	}
 
 	// Get the buffer size from the configuration
@@ -186,7 +186,7 @@ func UserPassword(ctx context.Context, password string, conn net.Conn, configura
 		custom_error = connections_exception.BufSizeParameterError
 		custom_error.SetOriginalError(err)
 		custom_error.SetDetails("When trying to convert the buffer size parameter on UserPassword")
-		exceptioncore.PanicIfNeeded(custom_error)
+		exceptioncore.DoPanic(custom_error)
 	}
 
 	// Create a buffer
@@ -198,7 +198,7 @@ func UserPassword(ctx context.Context, password string, conn net.Conn, configura
 		custom_error = connections_exception.ReceivingMessageError
 		custom_error.SetOriginalError(err)
 		custom_error.SetDetails("When trying to receive a message of User Password sent to Quotes Server on UserPassword")
-		exceptioncore.PanicIfNeeded(custom_error)
+		exceptioncore.DoPanic(custom_error)
 	}
 
 	// Print the buffer
@@ -229,7 +229,7 @@ func NewCedroConnector(ctx context.Context, configuration config.Config) (net.Co
 		custom_error = connections_exception.SimulationParameterError
 		custom_error.SetOriginalError(err)
 		custom_error.SetDetails("When trying to convert the Simulation parameter on NewCedroConnector")
-		exceptioncore.PanicIfNeeded(custom_error)
+		exceptioncore.DoPanic(custom_error)
 	}
 
 	// Connect to the Cedro server
@@ -242,7 +242,7 @@ func NewCedroConnector(ctx context.Context, configuration config.Config) (net.Co
 		custom_error = connections_exception.SendingMessageError
 		custom_error.SetOriginalError(err)
 		custom_error.SetDetails("When trying to finish Software Key to Quotes Server on NewCedroConnector")
-		exceptioncore.PanicIfNeeded(custom_error)
+		exceptioncore.DoPanic(custom_error)
 	}
 
 	// Send the username to the Cedro server
@@ -252,7 +252,7 @@ func NewCedroConnector(ctx context.Context, configuration config.Config) (net.Co
 		custom_error = connections_exception.SendingMessageError
 		custom_error.SetOriginalError(err)
 		custom_error.SetDetails("When trying to finish User Login to Quotes Server on NewCedroConnector")
-		exceptioncore.PanicIfNeeded(custom_error)
+		exceptioncore.DoPanic(custom_error)
 	}
 
 	// Send the password to the Cedro server
@@ -262,7 +262,7 @@ func NewCedroConnector(ctx context.Context, configuration config.Config) (net.Co
 		custom_error = connections_exception.SendingMessageError
 		custom_error.SetOriginalError(err)
 		custom_error.SetDetails("When trying to finish User Password to Quotes Server on NewCedroConnector")
-		exceptioncore.PanicIfNeeded(custom_error)
+		exceptioncore.DoPanic(custom_error)
 	}
 
 	return conn, err
